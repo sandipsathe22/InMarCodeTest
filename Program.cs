@@ -1,25 +1,56 @@
-var builder = WebApplication.CreateBuilder(args);
+﻿
 
-// Add services to the container.
+using System.Text;
+using System.Xml;
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+public class Program
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+
+    public static void Main()
+    {
+        //FizzBuzz();
+        Console.WriteLine("Enter the input string to reverse");
+        string input = Console.ReadLine();
+        string output = reversestring(input); 
+        Console.WriteLine(output);
+        FizzBuzz();
+        Console.ReadLine();
+    }
+
+    public static void FizzBuzz()
+    {
+        for (int i = 0; i <= 100; i++)
+        {
+            if (i % 3 == 0 && i % 5 == 0)
+            {
+                Console.WriteLine("fizzbuzz");
+            }
+            else
+            {
+                if (i % 3 == 0)
+                { 
+                    Console.WriteLine("fizz");
+                }
+                else if(i % 5 == 0)
+                {
+                    Console.WriteLine("buzz");
+                }
+            }
+        }
+    
+    }
+
+    public static string reversestring(string input)
+    {
+        StringBuilder output = new StringBuilder();
+        char[] chars = input.ToCharArray();
+        for (int i = input.Length-1; i >=0 ; i--)
+        { 
+            output.Append(chars[i]);
+        }
+
+        return output.ToString();
+    
+    }
+
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
